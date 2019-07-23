@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>osx中sublime下的C++环境部署 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="第一部分 编译器Tool -&amp;gt; Build System -&amp;gt; New Build System {        “cmd” : [“/usr/bin/g++ $file_name -std=c++11 -o ${file_base_name} &amp;amp;&amp;amp; ./${file_base_name}”],    “selector” : “source.c, source.c+">
+<meta name="keywords" content="环境搭建">
+<meta property="og:type" content="article">
+<meta property="og:title" content="osx中sublime下的C++环境部署">
+<meta property="og:url" content="http://yoursite.com/2019/07/23/osx中sublime下的C-环境部署/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="第一部分 编译器Tool -&amp;gt; Build System -&amp;gt; New Build System {        “cmd” : [“/usr/bin/g++ $file_name -std=c++11 -o ${file_base_name} &amp;amp;&amp;amp; ./${file_base_name}”],    “selector” : “source.c, source.c+">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-23T05:37:03.450Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="osx中sublime下的C++环境部署">
+<meta name="twitter:description" content="第一部分 编译器Tool -&amp;gt; Build System -&amp;gt; New Build System {        “cmd” : [“/usr/bin/g++ $file_name -std=c++11 -o ${file_base_name} &amp;amp;&amp;amp; ./${file_base_name}”],    “selector” : “source.c, source.c+">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-osx中sublime下的C-环境部署" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/23/osx中sublime下的C-环境部署/" class="article-date">
+  <time datetime="2019-07-23T02:10:50.000Z" itemprop="datePublished">2019-07-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      osx中sublime下的C++环境部署
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="第一部分-编译器"><a href="#第一部分-编译器" class="headerlink" title="第一部分 编译器"></a>第一部分 编译器</h2><p>Tool -&gt; Build System -&gt; New Build System</p>
+<p>{<br>    <!-- cmd 命令：调用g++, 运行file_name, std参数使用c++11标准 --><br>    “cmd” : [“/usr/bin/g++ $file_name -std=c++11 -o ${file_base_name} &amp;&amp; ./${file_base_name}”],<br>    “selector” : “source.c, source.c++”,<br>    “shell”: true,<br>    “working_dir” : “$file_path”<br>}</p>
+<p>保存为 c++.sublime-build</p>
+<p>Then in Build System, can select c++.</p>
+<p>选择后，就能正常编译运行了。</p>
+<h2 id="第二部分-插件"><a href="#第二部分-插件" class="headerlink" title="第二部分 插件"></a>第二部分 插件</h2><p>EasyClangcomplete:</p>
+<ol>
+<li><p>安装</p>
+</li>
+<li><p>参数设置： Preference -&gt; Package Setting -&gt; EsyClangcomplete</p>
+<p> common_flag:{} 中, 加入g++所在路径，</p>
+</li>
+</ol>
+<p>如下：<br>    “common_flags” : [<br>    // some example includes<br>    “-I/usr/include”,<br>    “-I$project_path/src”,<br>    // this is needed to include the correct headers for clang<br>    “-I/usr/lib/clang/$clang_version/include”,<br>    “-I/usr/bin/g++”,<br>    // For simple projects, you can add a folder where your current file is<br>    “-I$file_path”,<br>  ],</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/23/osx中sublime下的C-环境部署/" data-id="cjyfe2svd0000rqs6qoh0ppmp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境搭建/">环境搭建</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/07/23/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境搭建/">环境搭建</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/环境搭建/" style="font-size: 10px;">环境搭建</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/07/23/osx中sublime下的C-环境部署/">osx中sublime下的C++环境部署</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/23/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
